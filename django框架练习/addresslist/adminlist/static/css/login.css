@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+	margin:0px;
+	padding:0px;
+}
+
+body{
+	background: linear-gradient(to right,#3CF,#0FC,#4FC,#8FC,#AFC,#CFC,#AFC,#8FC,#4FC,#0FC,#3CF);
+}
+
+#div1{
+	width:600;
+	height:500;
+	position:relative;
+}
+
+table{
+	width:600;
+	height:380;
+	left:0;
+	bottom:0;
+	position:absolute;
+	border-collapse:collapse;
+	border:2px solid #0F0;
+	font-size:large;
+	background-color:#F99;
+}
+
+#login{
+	left:15%;
+	position:relative;
+	width:15%;	
+	height:50%;
+}
+	
+#register{
+	left:40%;
+	position:relative;
+	width:15%;
+	height:50%;
+}
+
+#information{
+	left: 40%;
+	bottom: 4%;
+	position: absolute;
+}
+
+.yh{
+	height:35%;
+	width:60%;
+}
+
+#title{
+	font-size:80;
+	font-style:normal;
+	text-shadow: 5px 5px 5px #9C3;
+	left:18%;
+	position:absolute;
+}

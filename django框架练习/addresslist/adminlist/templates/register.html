@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册界面</title>
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1 class="text-center">网页通讯录用户注册页面</h1>
+            <hr>
+        <h3 id="warning" style="color: red;text-align: center">{{ warning }}</h3>
+        <form method="POST" action="/register/" target="_self" onsubmit="javascript:return check()" class="form-horizontal" role="form">
+            {% csrf_token %}
+         <div class="form-group">
+            <label class="col-md-2" for="name" class="control-label">用户名：</label>
+            <div class="col-md-10">
+                <input type="text" placeholder="please input name" id="name" class="yh form-control" name="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2" for="password" class="control-label">请输入密码：</label>
+            <div class="col-md-10">
+                <input type="password" placeholder="please input password" id="password" class="yh form-control" name="password">
+             </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2" for="passwordagain" class="control-label">请确认密码：</label>
+            <div class="col-md-10">
+                <input type="password" placeholder="please input password again" id="passwordagain" class="yh form-control" name="passwordagain">
+            </div>
+        </div>
+            <div class="form-group">
+            <label class="col-md-2" for="passwordagain" class="control-label">邮箱：</label>
+            <div class="col-md-10">
+                <input type="email" placeholder="please input your mail" id="mail" class="form-control" name="mail">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 col-md-offset-3">
+                <input type="submit" id="ok" title="ok" class="btn btn-success">
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                <input type="reset" id="reset" title="reset" class="btn btn-primary">
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+Connect-VIServer -Server $args[0] -User $args[1] -Password $args[2]
+Get-VMHost | Select Name, @{N="Syslog.global.logDir";E={$_ | GetVMHostAdvancedConfiguration Syslog.global.logDir | Select -ExpandProperty Values}}

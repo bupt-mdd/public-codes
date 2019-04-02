@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>CkeckOnLineSys</title>
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <style>
+        #bottom{
+            bottom: 5%;
+            right: 3%;
+            position: fixed;
+            display:none;
+        }
+    </style>
+</head>
+<body>
+<b name="top"></b>
+<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+   <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+		  <a class="navbar-brand">web主机状态检测系统</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <div class="row">
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li><a href="/checkUI/"><span class="glyphicon glyphicon-home">检测界面</span></a></li>
+                        <li class="active"><a>用户管理界面</a></li>
+                    </ul>
+                </div>
+	            <div class="col-md-3 col-md-offset-3">
+	                <ul class="nav navbar-nav">
+                        <li class="active"><a>当前登录用户为：</a></li>
+                        <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b id="loginName"></b><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li >用户名：<label id="name"></label></li>
+                                <li class="divider"></li>
+                                <li><a href="/exit/">退出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+	            </div>
+            </div>
+        </div>
+   </div>
+</nav>
+
+<div class="wrapper">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <br/><br/><br/>
+            <hr>
+            <h1>当前注册用户信息如下：</h1>
+            <hr>
+            <table id="userList" class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="hidden">id</th>
+                    <th class="text-center" style="width:5%">序号</th>
+                    <th class="text-center" style="width:25%">用户名</th>
+                    <th class="text-center" style="width:30%">注册邮箱</th>
+                    <th class="text-center" style="width:15%">用户级别</th>
+                    <th class="text-center" style="width:25%">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <hr>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $.ajax({
+            url: "/getLoginName/",
+            type: "get",
+            dataType: "JSON",
+            success: function (data) {
+                $("#loginName").text(data.name.substring(0,2).concat(".."));
+                $("#name").text(data.name);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('获取数据错误');
+            }
+        })
+
+    window.onscroll = function(){
+            var t = document.documentElement.scrollTop || document.body.scrollTop;
+            var totop = document.getElementById( "bottom" );
+            if( t >= 0 ) {
+                totop.style.display = "inline";
+            } else {
+                totop.style.display = "none";
+            }
+            if(document.body.scrollTop==0)
+            {
+                totop.style.display = "none";
+            }
+        }
+
+    $(document).ready(
+            $("#userList").on('click', ".btnDel", function () {
+                        $.ajax({
+                            url: "/delUser/",
+                            type: "GET",
+                            data: {"id": $(this).parent("td").siblings("td.hidden").text()},
+                            dataType: "JSON",
+                            success: function (data) {
+                                if(data.success=='false')
+                                {
+                                    alert("此用户为超级用户不可删除");
+                                }
+                                //如果成功，隐藏弹出框并重新加载数据
+                                $('#modal_form').modal('hide');
+                                reload_table();
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                alert('删除错误！');
+                            }
+                        })
+                    }
+            ),
+            reload_table()
+    )
+
+
+    function reload_table() {
+        $.ajax({
+            url: "/getUserList/",
+            type: "get",
+            dataType: "JSON",
+            success: function (data) {
+                $("#userList").children("tbody").empty()
+                var htmlstr = ""
+                for (var i = 0; i < data.userList.length; i++) {
+                    htmlstr = htmlstr + "<tr>" +
+                            "<td class='hidden'>" + data.userList[i].id + "</td>" +
+                            "<td>" + (i + 1) + "</td>" +
+                            "<td class='text-center'>" + data.userList[i].userName + "</td>" +
+                            "<td class='text-center'>" + data.userList[i].email + "</td>" +
+                            "<td class='text-center'>" + data.userList[i].userRank + "</td>" +
+                            "<td class='text-center'>" +
+                            "<a type='button' class='btn btn-xs btn-danger btnDel'>删除</a>" +
+                            "</td>" +
+                            "</tr>";
+                }
+
+                $("#userList").children("tbody").html(htmlstr);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('获取数据错误');
+            }
+        })
+    }
+
+</script>
+<a href="#top" id="bottom">
+    <button type="button" class="btn btn-default" title="回到顶部">
+        <span class="glyphicon glyphicon-arrow-up"></span>
+    </button>
+</a>
+</body>
+</html>

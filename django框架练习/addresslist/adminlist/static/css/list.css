@@ -1,0 +1,34 @@
+@charset "utf-8";
+/* CSS Document */
+*{
+margin:0px;
+}
+
+nav{
+	line-height:40px;
+	font-size:large;
+	background-color:#CC9;
+	position:relative;
+}
+
+.item1{
+	width: 17%;
+}
+
+.item2{
+	width: 15%;
+}
+
+body{
+	background: linear-gradient(to right,#0FF,#0FC,#4FC,#8FC,#AFC,#CFC,#AFC,#8FC,#4FC,#0FC,#0FF);
+}
+
+#loginout{
+	right:5%;
+	top:21%;
+	position:absolute;
+}
+
+input{
+	width:60px;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>通讯录界面</title>
+        <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+        <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+        <link type="text/css" rel="stylesheet" href="/static/css/list.css">
+	</head>
+	<body onload="resize()" onResize="resize()">
+    <div id="div1 row">
+       <nav>&nbsp;&nbsp;<b>当前登陆用户为：</b><label>{{ name }}</label>
+           <a type="button" ID="loginout" class="btn  btn-xs btn-primary" href="/exit/" title="exit">退出</a>
+       </nav><br/>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+           <a href="/add/" type="button" class="btn btn-success pull-right">添加</a>
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="hidden">序号</th>
+                <th class="item2 text-center" STYLE="width: 15%">姓名</th>
+                <th class="item1 text-left">邮箱</th>
+                <th class="item1 text-left">电话</th>
+                <th class="item1 text-left">住址</th>
+                <th class="item1 text-left">QQ号码</th>
+                <th class="item1 text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in inflist %}
+            <tr>
+                <td class="hidden">{{ item.id }}</td>
+                <td class="text-center">{{ item.newname }}</td>
+                <td>{{ item.mail }}</td>
+                <td>{{ item.phone }}</td>
+                <td>{{ item.address }}</td>
+                <td>{{ item.QQ_number }}</td>
+                <td CLASS="text-center">
+                <a type="button" class="btn  btn-xs btn-success" href="/edit/?itemid={{ item.id }}">编辑</a>
+                <a type="button" class="btn  btn-xs btn-danger" href="/del/?itemid={{ item.id }}">删除</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+        </div>
+    </div>
+	</body>
+</html>

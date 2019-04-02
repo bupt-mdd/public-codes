@@ -1,0 +1,63 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>添加新的联系人</title>
+        <link type="text/css" href="/static/css/addlist.css" rel="stylesheet">
+	</head>
+    
+	<body onLoad="resize()" onResize="resize()">
+    <div id="div1">
+    <h1 id="title" onClick="ll()">Web通讯录</h1>
+    <form action="/edit/" method="POST" target="_self" onSubmit="javascript:return check()">
+        {% csrf_token %}
+        <input type="hidden" name="id" value={{ item.id }}>
+    <table border="1" id="table1">
+        <tr>
+          <th colspan="2" scope="col">联系人信息单</th>
+        </tr>
+        <tr>
+          <td>姓名：（*）</td>
+          <td><input class="yh" type="text" name="newname" placeholder="the name" value={{ item.newname }}></td>
+        </tr>
+        <tr>
+          <td>邮箱：(*)</td>
+          <td><input class="yh" type="text" name="mail" placeholder="email" value={{ item.mail }}></td>
+        </tr>
+        <tr>
+          <td>电话：（*）</td>
+          <td><input class="yh" type="number" name="phone" placeholder="phone number" value={{ item.phone }}></td>
+        </tr>
+        <tr>
+          <td>住址：</td>
+          <td><input class="yh" type="text" name="address" placeholder="address" value={{ item.address }}></td>
+        </tr>
+        <tr>
+          <td>QQ号：</td>
+          <td><input class="yh" type="number" name="QQ_number" placeholder="qq number" value={{ item.QQ_number }}></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          <ul>
+          <li>带*号的是必须项，否则无法提交</li>
+          <li>邮箱填写规则为：xxx@xxx.xxx</li>
+          <li>电话号可以不加区号</li>
+          <li>电话号不多于十一位</li>
+          </ul>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          <input type="submit" value="确定" id="ok" title="ok">
+          <input type="reset" value="清空" id="reset" title="reset">
+          </td>
+        </tr>
+    </table>
+    </form>
+    <p id="p1">（版权归XXX所有，盗版必究）</p>
+    </div>
+    
+    <script type="text/javascript" src="/static/js/addlist.js"></script>
+    
+	</body>
+</html>
