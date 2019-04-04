@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>µÇÂ½</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/supersized.css">
+    <link rel="stylesheet" href="assets/css/style3.css">
+</head>
+
+<body>
+<h1>µÇÂ½Ò³Ãæ£º</h1>
+<form method = 'post'>
+    {% csrf_token %}
+    <h1>Log in</h1>
+    <p>
+         <label for="usernamesignup" data-icon="u">Your username</label>
+         <input id="usernamesignup" name="username" required="required" type="text" placeholder="mysuperusername690" />
+     </p>
+     <p>
+         <label for="passwordsignup"  data-icon="p">Your password </label>
+         <input id="passwordsignup" name="password" required="required" type="password" placeholder="eg. X8df!90EO"/>
+     </p>
+     <p >
+        <input type="submit" value="Login" />
+    </p>
+    <p>
+        Not a member yet ?
+        <a href="http://127.0.0.1:8000/register" class="to_register">Join us</a>
+    </p>
+</form>
+<br>
+<a href="http://127.0.0.1:8000/register/">×¢²á</a>
+
+<script src="assets/js/jquery-1.8.2.min.js"></script>
+    <script src="assets/js/supersized.3.2.7.min.js"></script>
+    <script src="assets/js/supersized-init.js"></script>
+    <script src="assets/js/scripts.js"></script>
+</body>
+</html>
